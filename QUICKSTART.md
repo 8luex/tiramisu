@@ -70,7 +70,7 @@ Expected output:
 Wait 1-2 minutes for commands to register, then test:
 
 ```
-/record expense amount:100 category:🍲 อาหาร/เครื่องดื่ม note:ทดสอบ
+/record expense amount:100 category:munchies note:test transaction
 ```
 
 ---
@@ -133,16 +133,22 @@ Your bot is now tracking finances! Try these commands:
 
 ```bash
 # Record expense
-/record expense amount:150 category:🍲 อาหาร/เครื่องดื่ม
+/record expense amount:150 category:munchies note:coffee run
 
 # Record income
-/record income amount:30000 category:💵 เงินเดือน
+/record income amount:30000 category:main bag note:payday!!
 
-# View summary
-/summary period:เดือนนี้
+# View weekly summary
+/summary period:this week
 
-# Compare with friend
-/compare target:@Friend
+# View monthly summary
+/summary period:this month
+
+# Compare with one friend
+/compare target1:@Friend
+
+# Compare with multiple friends (weekly)
+/compare target1:@Friend1 target2:@Friend2 period:this week
 ```
 
 ---

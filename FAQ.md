@@ -65,6 +65,11 @@ It does NOT store:
 2. Check if you selected the correct period (month vs. year)
 3. Verify transactions were saved successfully
 
+### Q: When does a "week" start and end?
+**A:** Weeks start on Sunday and end on Saturday in Bangkok timezone:
+- **Start**: Sunday at 00:00:00 ICT
+- **End**: Saturday at 23:59:59 ICT
+
 ### Q: When does a "month" start and end?
 **A:** Months follow calendar boundaries in Bangkok timezone:
 - **Start**: 1st day at 00:00:00 ICT
@@ -74,6 +79,7 @@ Example: August 2026 = Aug 1, 2026 00:00:00 to Aug 31, 2026 23:59:59
 
 ### Q: Can I see summaries for previous months?
 **A:** Currently, you can only view:
+- **This week** (current calendar week)
 - **This month** (current calendar month)
 - **This year** (current calendar year)
 
@@ -84,29 +90,39 @@ Example: August 2026 = Aug 1, 2026 00:00:00 to Aug 31, 2026 23:59:59
 
 ---
 
-## ⚔️ Comparison Questions
+## ☕ Comparison Questions
 
 ### Q: What does the comparison show?
 **A:** The `/compare` command shows:
-- Total expenses for the current month for both users
-- Top spending category for each user
-- Who spent less and by how much
+- Total expenses for the selected period (week/month/year)
+- Top spending category for each person
+- Leaderboard ranking (who spent least = who saved most)
+- Medals for top 3 (🥇🥈🥉)
+
+### Q: Can I compare with multiple people?
+**A:** Yes! You can compare with up to 3 friends at once (4 people total including yourself). The results show as a leaderboard.
+
+### Q: What time periods can I compare?
+**A:** You can choose:
+- **This week** (Sunday to Saturday)
+- **This month** (current calendar month) - default
+- **This year** (current calendar year)
 
 ### Q: Can I compare income?
 **A:** No, comparisons only show expenses. Income is private and not shown in comparisons.
 
 ### Q: Can others see my detailed transactions?
 **A:** No! The comparison only shows:
-- Total monthly expense (one number)
+- Total period expense (one number)
 - Your top category (category name only, no amounts)
 
 Your individual transaction details remain private.
 
-### Q: Why does comparison show ฿0 for my friend?
-**A:** This means your friend hasn't recorded any expenses this month yet. Encourage them to start tracking!
+### Q: Why does comparison show ฿0 for someone?
+**A:** This means they haven't recorded any expenses for that period yet. Encourage them to start tracking!
 
-### Q: Can I compare with multiple users at once?
-**A:** No, you can only compare with one user at a time. To compare with multiple people, run the command multiple times.
+### Q: Who "wins" the comparison?
+**A:** The winner (🥇) is whoever spent the LEAST money = saved the most! It's all about saving money fr fr.
 
 ---
 
@@ -156,7 +172,7 @@ Just ensure Node.js v20+ and MySQL are available.
 
 ```typescript
 export const EXPENSE_CATEGORIES = [
-  { name: '🎓 การศึกษา', value: 'EDUCATION' },
+  { name: '🎮 Entertainment (vibes)', value: 'EDUCATION' },
   // Add your categories here
 ];
 ```
@@ -164,11 +180,12 @@ export const EXPENSE_CATEGORIES = [
 Then rebuild and redeploy.
 
 ### Q: Can I change the bot's language?
-**A:** Yes! The bot currently uses Thai language. To change to English or another language:
+**A:** Yes! The bot currently uses English with casual slang. To change the style or language:
 1. Edit all command descriptions in `src/commands/*.ts`
 2. Edit category names in `src/utils/categories.ts`
 3. Edit embed templates in `src/utils/embeds.ts`
-4. Rebuild and redeploy
+4. Update footer texts and emoji choices
+5. Rebuild and redeploy
 
 ### Q: Can I change the timezone?
 **A:** Yes! Edit [src/utils/date.ts](src/utils/date.ts):
@@ -179,13 +196,14 @@ dayjs.tz.setDefault('Your/Timezone');
 ```
 
 ### Q: Can I change the embed colors?
-**A:** Yes! Edit [src/utils/embeds.ts](src/utils/embeds.ts). Current colors:
-- Expense: `0xef4444` (red)
-- Income: `0x22c55e` (green)
-- Summary (positive): `0x22c55e` (green)
-- Summary (negative): `0xef4444` (red)
-- Comparison: `0x3b82f6` (blue)
-- Error: `0xef4444` (red)
+**A:** Yes! Edit [src/utils/embeds.ts](src/utils/embeds.ts). Current tiramisu theme colors:
+- Expense: `0xD4A574` (coffee brown ☕)
+- Income: `0xFFF8E7` (cream 🍰)
+- Summary (positive): `0xFFF8E7` (cream 🍰)
+- Summary (negative): `0xD4A574` (coffee brown ☕)
+- Comparison (1v1): `0xC8A882` (latte 🤎)
+- Comparison (multi): `0xE8D5C4` (biscuit 🍪)
+- Error: `0xD4A574` (coffee brown ☕)
 
 ---
 

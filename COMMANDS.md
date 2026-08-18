@@ -33,11 +33,11 @@ Track your spending with categories.
 ```
 
 ### Response
-Returns a **red-colored embed** with:
+Returns a **coffee brown colored embed** (☕ tiramisu theme) with:
 - Transaction details
 - Timestamp
 - Your Discord profile
-- Footer: "tiramisu | money moves only 🔥"
+- Footer: "🍰 ᯓ tiramisu | ꔛ track ur vibes ໒꒰ྀི´ ˘ ` ꒱ྀིა"
 
 ---
 
@@ -67,11 +67,11 @@ Track your earnings.
 ```
 
 ### Response
-Returns a **green-colored embed** with:
+Returns a **cream colored embed** (🍰 tiramisu theme) with:
 - Transaction details
 - Timestamp
 - Your Discord profile
-- Footer: "tiramisu | money moves only 🔥"
+- Footer: "🍰 ᯓ tiramisu | ꔛ track ur vibes ໒꒰ྀི´ ˘ ` ꒱ྀིა"
 
 ---
 
@@ -86,37 +86,39 @@ Get a detailed summary of your income and expenses.
 
 ### Parameters
 - `period` **(required)** - what timeframe tho:
+  - 📅 this week
   - 🔥 this month
   - 💯 this year
 
 ### Examples
 ```
+/summary period:this week
 /summary period:this month
 /summary period:this year
 ```
 
 ### Response
 Returns an embed showing:
-- **money in** - total income
-- **money out** - total expenses  
+- **🥛 money in** - total income
+- **☕ money out** - total expenses  
 - **left over** - net balance
-  - Green with "✨ W rizz" if positive
-  - Red with "😭 L fr" if negative
-- **where ur money went** - category breakdown
+  - Cream colored (🍰) with "W rizz" if positive
+  - Coffee brown (☕) with "L fr" if negative
+- **☕ where ur money went** - category breakdown
   - Visual percentage bars
   - Sorted by highest spending
   - Shows amount and percentage per category
 
 ### Example Output
 ```
-📊 ur money recap - this month
-August 2026 | 🔥 W rizz
+🍰 ur money recap - this month
+August 2026 ໒꒰ྀི 🍰 W rizz ꒱ྀིა
 
-💰 money in: ฿35,000
-💸 money out: ฿12,500
-✨ left over: +฿22,500
+🥛 money in: ฿35,000
+☕ money out: ฿12,500
+🍰 left over: +฿22,500
 
-🔥 where ur money went
+☕ where ur money went
 
 🍕 Food & Drinks (munchies)
 ████████░░ 45.0% (฿5,625)
@@ -128,88 +130,107 @@ August 2026 | 🔥 W rizz
 ███░░░░░░░ 16.0% (฿2,000)
 ```
 
-Footer: "tiramisu | no cap tracking 💯"
+Footer: "🍰 ᯓ tiramisu | ꔛ ur spending wrapped ໒꒰ྀི´ ˘ ` ꒱ྀིა"
 
 ---
 
-## ⚔️ `/compare` - battle ur homie fr
+## ☕ `/compare` - spending battle
 
-Compare your monthly expenses with another user.
+Compare expenses with up to 3 friends. Leaderboard shows who saved the most!
 
 ### Syntax
 ```
-/compare target:<user>
+/compare target1:<user> [target2:<user>] [target3:<user>] [period:<choice>]
 ```
 
 ### Parameters
-- `target` **(required)** - who we beefing with
-  - Cannot be yourself
-  - Cannot be a bot
+- `target1` **(required)** - first person to compare
+- `target2` *(optional)* - second person (for 3-way comparison)
+- `target3` *(optional)* - third person (for 4-way comparison)
+- `period` *(optional)* - what timeframe tho (defaults to this month):
+  - 📅 this week
+  - 🔥 this month
+  - 💯 this year
+  
+**Rules:**
+- Cannot compare with yourself
+- Cannot compare with bots
+- Winner = who spent the least (saved the most)
 
 ### Examples
 ```
-/compare target:@JohnDoe
-/compare target:@Friend
+# 1v1 Battle
+/compare target1:@Friend
+
+# 3-way Battle with custom period
+/compare target1:@Friend1 target2:@Friend2 period:this week
+
+# 4-way Battle (max)
+/compare target1:@Friend1 target2:@Friend2 target3:@Friend3 period:this month
 ```
 
 ### Response
-Returns a comparison embed showing:
-- **W/L indicators** - who's winning the savings game
-- **Both users' total expenses** for current month
-- **Top spending category** for each user
-- **verdict** - who saved more and by how much
+Returns a leaderboard embed showing:
+- **🥇🥈🥉 Medal rankings** - sorted by who spent least
+- **Total expenses** for each person in selected period
+- **Top spending category** for each person
+- **verdict** - how much the winner saved
 
-### Example Output
+### Example Output (Multi-User)
 ```
-⚔️ spending battle fr fr
-You VS Friend
+☕ spending battle - this month
+🍰 leaderboard (who saved the most) ໒꒰ྀི´ ˘ ` ꒱ྀིა
 
-W You
+🥇 You (W)
 💸 spent: ฿12,500
 🔝 mostly on: 🍕 Food & Drinks (munchies)
 
-L Friend
+🥈 Friend1
 💸 spent: ฿15,800
 🔝 mostly on: 🛍️ Shopping (treat yourself)
 
+🥉 Friend2
+💸 spent: ฿18,200
+🔝 mostly on: 🎮 Entertainment (vibes)
+
 🔥 verdict
-You ate!! saved ฿3,300 more than Friend 💯
+You ate!! saved ฿5,700 more 💯
 ```
 
-Footer: "tiramisu | slay the spending game 💅"
+Footer: "tiramisu bot 🍰 who ate the most ໒꒰ྀི´ ˘ ` ꒱ྀིა"
 
 ---
 
-## 💀 Error Messages (bruh moments)
+## ☕ Error Messages (bruh moments)
 
-All commands include error handling:
+All commands include error handling with coffee brown embeds:
 
 ### Invalid Amount
 ```
-💀 bruh moment
+☕ bruh moment
 aint no way 💀 amount gotta be more than 0 baht bestie
-run it back bestie 💫
+🍰 run it back bestie ໒꒰ྀི´ ˘ ` ꒱ྀིა
 ```
 
 ### Cannot Compare with Bot
 ```
-💀 bruh moment
+☕ bruh moment
 bruh u cant beef with a bot 💀
-run it back bestie 💫
+🍰 run it back bestie ໒꒰ྀི´ ˘ ` ꒱ྀིა
 ```
 
 ### Cannot Compare with Yourself
 ```
-💀 bruh moment
+☕ bruh moment
 bestie u cant compare with urself 😭 thats just sad
-run it back bestie 💫
+🍰 run it back bestie ໒꒰ྀི´ ˘ ` ꒱ྀིა
 ```
 
 ### Database Error
 ```
-💀 bruh moment
+☕ bruh moment
 lowkey broke rn 💀 couldnt save that, try again
-run it back bestie 💫
+🍰 run it back bestie ໒꒰ྀི´ ˘ ` ꒱ྀིა
 ```
 
 ---
@@ -230,7 +251,8 @@ run it back bestie 💫
 
 ### Comparing with Friends
 - 🏆 **Make it fun** - gamify saving money
-- 💪 **Friendly competition** - see who's slaying
+- 💪 **Friendly competition** - see who's slaying (up to 4 people!)
+- 📊 **Weekly battles** - compare different time periods
 - 📉 **Learn habits** - discover saving strategies
 - 🤝 **Accountability** - keep each other motivated
 
@@ -241,7 +263,7 @@ run it back bestie 💫
 - All data is **private per-user** (no cap)
 - Other users **cannot see** your transactions
 - Only you can see your `/summary`
-- `/compare` only shows **monthly totals** and **top categories**
+- `/compare` only shows **period totals** and **top categories** (not individual transactions)
 - Data stored securely with your Discord User ID
 
 ---

@@ -13,6 +13,7 @@ export const data = new SlashCommandBuilder()
       .setDescription('⏰ what timeframe tho')
       .setRequired(true)
       .addChoices(
+        { name: '📅 this week', value: 'WEEK' },
         { name: '🔥 this month', value: 'MONTH' },
         { name: '💯 this year', value: 'YEAR' }
       )
@@ -22,13 +23,16 @@ export async function execute(interaction: ChatInputCommandInteraction): Promise
   try {
     await interaction.deferReply();
 
-    const period = interaction.options.getString('period', true) as 'MONTH' | 'YEAR';
+    const period = interaction.options.getString('period', true) as 'WEEK' | 'MONTH' | 'YEAR';
     const now = dayjs().tz();
 
     let startDate: Date;
     let endDate: Date;
 
-    if (period === 'MONTH') {
+    if (period === 'WEEK') {
+      startDate = now.startOf('week').toDate();
+      endDate = now.endOf('week').toDate();
+    } else if (period === 'MONTH') {
       startDate = now.startOf('month').toDate();
       endDate = now.endOf('month').toDate();
     } else {

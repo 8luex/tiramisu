@@ -11,8 +11,8 @@ export function createTransactionEmbed(
   note: string | null
 ): EmbedBuilder {
   const isExpense = type === 'EXPENSE';
-  const color = isExpense ? 0xef4444 : 0x22c55e;
-  const emoji = isExpense ? '💸' : '💰';
+  const color = isExpense ? 0xD4A574 : 0xFFF8E7;
+  const emoji = isExpense ? '💸' : '🍰';
   const title = isExpense ? 'spent that bag fr fr' : 'secured the bag!! 💯';
 
   const embed = new EmbedBuilder()
@@ -27,7 +27,7 @@ export function createTransactionEmbed(
       { name: '📁 category', value: getCategoryDisplay(category), inline: true }
     )
     .setTimestamp()
-    .setFooter({ text: 'tiramisu | money moves only 🔥' });
+    .setFooter({ text: '🍰 ᯓ tiramisu | ꔛ money moves only ໒꒰ྀི´ ˘ ` ꒱ྀིა' });
 
   if (note) {
     embed.addFields({ name: '📝 note', value: note, inline: false });
@@ -38,7 +38,7 @@ export function createTransactionEmbed(
 
 export function createSummaryEmbed(
   user: User,
-  period: 'MONTH' | 'YEAR',
+  period: 'WEEK' | 'MONTH' | 'YEAR',
   totalIncome: Decimal,
   totalExpense: Decimal,
   categoryBreakdown: Array<{ category: string; amount: Decimal; percentage: number }>
@@ -46,34 +46,36 @@ export function createSummaryEmbed(
   const netBalance = totalIncome.minus(totalExpense);
   const isPositive = netBalance.isPositive();
 
-  const periodText = period === 'MONTH' ? 'this month' : 'this year';
+  const periodText = period === 'WEEK' ? 'this week' : period === 'MONTH' ? 'this month' : 'this year';
   const periodDate =
-    period === 'MONTH'
-      ? dayjs().tz().format('MMMM YYYY')
-      : dayjs().tz().format('YYYY');
+    period === 'WEEK'
+      ? `Week of ${dayjs().tz().startOf('week').format('MMM D')}`
+      : period === 'MONTH'
+        ? dayjs().tz().format('MMMM YYYY')
+        : dayjs().tz().format('YYYY');
 
-  const statusEmoji = isPositive ? '🔥' : '💀';
+  const statusEmoji = isPositive ? '🍰' : '💀';
   const statusText = isPositive ? 'W rizz' : 'L fr';
 
   const embed = new EmbedBuilder()
-    .setColor(isPositive ? 0x22c55e : 0xef4444)
-    .setTitle(`📊 ur money recap - ${periodText}`)
-    .setDescription(`**${periodDate}** | ${statusEmoji} ${statusText}`)
+    .setColor(isPositive ? 0xFFF8E7 : 0xD4A574)
+    .setTitle(`🍰 ur money recap - ${periodText}`)
+    .setDescription(`**${periodDate}** ໒꒰ྀི ${statusEmoji} ${statusText} ꒱ྀིა`)
     .setAuthor({
       name: user.username,
       iconURL: user.displayAvatarURL(),
     })
     .addFields(
-      { name: '💰 money in', value: `฿${totalIncome.toString()}`, inline: true },
-      { name: '💸 money out', value: `฿${totalExpense.toString()}`, inline: true },
+      { name: '🥛 money in', value: `฿${totalIncome.toString()}`, inline: true },
+      { name: '☕ money out', value: `฿${totalExpense.toString()}`, inline: true },
       {
-        name: `${isPositive ? '✨' : '😭'} left over`,
+        name: `${isPositive ? '🍰' : '😭'} left over`,
         value: `${isPositive ? '+' : ''}฿${netBalance.toString()}`,
         inline: true,
       }
     )
     .setTimestamp()
-    .setFooter({ text: 'tiramisu | no cap tracking 💯' });
+    .setFooter({ text: '🍰 ᯓ tiramisu | ꔛ no cap tracking ໒꒰ྀི´ ˘ ` ꒱ྀིა' });
 
   if (categoryBreakdown.length > 0) {
     const breakdownText = categoryBreakdown
@@ -103,22 +105,20 @@ export function createComparisonEmbed(
   const loser = invokerSpentLess ? target : invoker;
 
   const embed = new EmbedBuilder()
-    .setColor(0x3b82f6)
+    .setColor(0xC8A882)
     .setTitle('⚔️ spending battle fr fr')
     .setDescription(`${invoker.username} VS ${target.username}`)
     .addFields(
       {
         name: `${invokerSpentLess ? 'W ' : 'L '}${invoker.username}`,
-        value: `💸 spent: ฿${invokerExpense.toString()}${
-          invokerTopCategory ? `\n🔝 mostly on: ${getCategoryDisplay(invokerTopCategory)}` : ''
-        }`,
+        value: `💸 spent: ฿${invokerExpense.toString()}${invokerTopCategory ? `\n🔝 mostly on: ${getCategoryDisplay(invokerTopCategory)}` : ''
+          }`,
         inline: true,
       },
       {
         name: `${!invokerSpentLess ? 'W ' : 'L '}${target.username}`,
-        value: `💸 spent: ฿${targetExpense.toString()}${
-          targetTopCategory ? `\n🔝 mostly on: ${getCategoryDisplay(targetTopCategory)}` : ''
-        }`,
+        value: `💸 spent: ฿${targetExpense.toString()}${targetTopCategory ? `\n🔝 mostly on: ${getCategoryDisplay(targetTopCategory)}` : ''
+          }`,
         inline: true,
       }
     )
@@ -128,18 +128,57 @@ export function createComparisonEmbed(
       inline: false,
     })
     .setTimestamp()
-    .setFooter({ text: 'tiramisu | slay the spending game 💅' });
+    .setFooter({ text: '🍰 ᯓ tiramisu | ꔛ who ate the most ໒꒰ྀི´ ˘ ` ꒱ྀིა' });
+
+  return embed;
+}
+
+export function createMultiComparisonEmbed(
+  userStats: Array<{ user: User; total: Decimal; topCategory: string | null }>,
+  period: 'WEEK' | 'MONTH' | 'YEAR'
+): EmbedBuilder {
+  const periodText = period === 'WEEK' ? 'this week' : period === 'MONTH' ? 'this month' : 'this year';
+  const winner = userStats[0];
+  const medals = ['🥇', '🥈', '🥉', '4️⃣'];
+
+  const embed = new EmbedBuilder()
+    .setColor(0xE8D5C4)
+    .setTitle(`⚔️ spending battle - ${periodText}`)
+    .setDescription('🍰 leaderboard (who saved the most) ໒꒰ྀི´ ˘ ` ꒱ྀིა');
+
+  userStats.forEach((stat, index) => {
+    const medal = medals[index] || '🔸';
+    const label = index === 0 ? `${medal} ${stat.user.username} (W)` : `${medal} ${stat.user.username}`;
+
+    embed.addFields({
+      name: label,
+      value: `💸 spent: ฿${stat.total.toString()}${stat.topCategory ? `\n🔝 mostly on: ${getCategoryDisplay(stat.topCategory)}` : ''
+        }`,
+      inline: false,
+    });
+  });
+
+  if (userStats.length > 1) {
+    const diff = userStats[userStats.length - 1].total.minus(winner.total);
+    embed.addFields({
+      name: '🔥 verdict',
+      value: `${winner.user.username} ate!! saved ฿${diff.toString()} more 💯`,
+      inline: false,
+    });
+  }
+
+  embed.setTimestamp().setFooter({ text: 'tiramisu 🍰 who ate the most ໒꒰ྀི´ ˘ ` ꒱ྀིა' });
 
   return embed;
 }
 
 export function createErrorEmbed(message: string): EmbedBuilder {
   return new EmbedBuilder()
-    .setColor(0xef4444)
+    .setColor(0xD4A574)
     .setTitle('💀 bruh moment')
     .setDescription(message)
     .setTimestamp()
-    .setFooter({ text: 'run it back bestie 💫' });
+    .setFooter({ text: '🍰 run it back bestie ໒꒰ྀི´ ˘ ` ꒱ྀིა' });
 }
 
 function createPercentageBar(percentage: number): string {

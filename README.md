@@ -24,16 +24,17 @@ Track your spending the way you actually talk! Built with **TypeScript**, **disc
   - ✨ Other Income (extra $$$)
 
 ### 📊 `/summary` - Check Your Money Situation
-- Monthly or yearly recap
+- Weekly, monthly, or yearly recap
 - Money in vs money out
 - See what's left over
 - Category breakdown with visual bars (no cap)
 
 ### ⚔️ `/compare` - Battle Your Homies
-- Compare monthly spending with friends
-- See who saved more (W/L vibes)
-- View top spending categories
-- Flex your savings fr fr
+- Compare spending with up to 3 friends at once
+- Choose timeframe: weekly, monthly, or yearly
+- Leaderboard showing who saved the most
+- See who's on top (W vibes)
+- View top spending categories for each person
 
 ---
 
@@ -216,13 +217,16 @@ tiramisu/
 
 ### `/summary`
 ```
-/summary period:เดือนนี้
-/summary period:ปีนี้
+/summary period:this week
+/summary period:this month
+/summary period:this year
 ```
 
 ### `/compare`
 ```
-/compare target:@friend
+/compare target1:@friend1
+/compare target1:@friend1 target2:@friend2 period:this week
+/compare target1:@friend1 target2:@friend2 target3:@friend3 period:this month
 ```
 
 ---
@@ -259,7 +263,7 @@ Edit [src/utils/categories.ts](src/utils/categories.ts):
 
 ```typescript
 export const EXPENSE_CATEGORIES = [
-  { name: '🎓 การศึกษา', value: 'EDUCATION' },
+  { name: '🎮 Entertainment (vibes)', value: 'EDUCATION' },
   // Add more categories...
 ];
 ```
