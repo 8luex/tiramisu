@@ -1,38 +1,39 @@
-# 🍰 Tiramisu Finance Bot
+# 🍰 Tiramisu Bot
 
-A lightweight, production-ready **Personal Finance & Expense Tracker Discord Bot** optimized for **Discloud** free tier hosting (100MB RAM limit).
+A lightweight, production-ready **Expense Tracker Discord Bot** optimized for **Discloud** free tier hosting (100MB RAM limit).
 
-Built with **TypeScript**, **discord.js v14**, **Prisma ORM**, and **MySQL**.
+Track your spending the way you actually talk! Built with **TypeScript**, **discord.js v14**, **Prisma ORM**, and **MySQL**.
 
 ---
 
-## ✨ Features
+## 🔥 Features
 
-### 📝 `/record` - Record Transactions
-- **`/record expense`** - Track your expenses with categories
-  - 🍲 อาหาร / เครื่องดื่ม
-  - 🚗 เดินทาง
-  - 🛍️ ช้อปปิ้ง
-  - 🏠 บิล / ค่าใช้จ่ายประจำ
-  - 🎮 บันเทิง / สตรีมมิ่ง
-  - 📦 อื่นๆ
+### 💸 `/record` - Track Your Spending
+- **`/record expense`** - spent that bag fr fr
+  - 🍕 Food & Drinks (munchies)
+  - 🚗 Transportation (on the move)
+  - 🛍️ Shopping (treat yourself)
+  - 🏠 Bills & Utilities (adulting)
+  - 🎮 Entertainment (vibes)
+  - ✨ Other (random stuff)
 
-- **`/record income`** - Track your income
-  - 💵 เงินเดือน
-  - 💼 งานเสริม / ฟรีแลนซ์
-  - 🎁 ของขวัญ / โบนัส
-  - 📦 รายรับอื่นๆ
+- **`/record income`** - secured the bag!! 💯
+  - 💰 Salary (main bag)
+  - 💼 Freelance (side hustle)
+  - 🎁 Gifts & Bonuses (blessed)
+  - ✨ Other Income (extra $$$)
 
-### 📊 `/summary` - View Financial Summary
-- Monthly or yearly summary
-- Total income and expense breakdown
-- Net balance calculation
-- Category percentage breakdown with visual bars
+### 📊 `/summary` - Check Your Money Situation
+- Monthly or yearly recap
+- Money in vs money out
+- See what's left over
+- Category breakdown with visual bars (no cap)
 
-### ⚔️ `/compare` - Compare Expenses
-- Compare monthly expenses with friends
-- See who spent less
-- View top spending categories for each user
+### ⚔️ `/compare` - Battle Your Homies
+- Compare monthly spending with friends
+- See who saved more (W/L vibes)
+- View top spending categories
+- Flex your savings fr fr
 
 ---
 

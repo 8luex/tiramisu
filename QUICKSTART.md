@@ -1,6 +1,6 @@
 # ⚡ Quick Start Guide
 
-Get your Tiramisu Finance Bot running in 5 minutes!
+Get your Tiramisu Bot running in 5 minutes!
 
 ---
 
@@ -60,7 +60,7 @@ npm run dev
 
 Expected output:
 ```
-🤖 Bot logged in as Tiramisu Finance Bot#1234
+🤖 Bot logged in as tiramisu#6772
 📊 Serving 3 commands
 ✅ Slash commands registered successfully
 ```

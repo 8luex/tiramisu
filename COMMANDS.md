@@ -1,10 +1,10 @@
 # 📋 Command Reference
 
-Quick reference guide for all Tiramisu Finance Bot commands.
+Quick reference guide for all Tiramisu Bot commands! 🔥
 
 ---
 
-## 💸 `/record expense` - Record an Expense
+## 💸 `/record expense` - spent that bag fr fr
 
 Track your spending with categories.
 
@@ -14,22 +14,22 @@ Track your spending with categories.
 ```
 
 ### Parameters
-- `amount` **(required)** - Amount in Baht (minimum 0.01)
-- `category` **(required)** - Choose from:
-  - 🍲 อาหาร / เครื่องดื่ม (Food & Drinks)
-  - 🚗 เดินทาง (Transportation)
-  - 🛍️ ช้อปปิ้ง (Shopping)
-  - 🏠 บิล / ค่าใช้จ่ายประจำ (Bills & Utilities)
-  - 🎮 บันเทิง / สตรีมมิ่ง (Entertainment & Streaming)
-  - 📦 อื่นๆ (Other)
-- `note` *(optional)* - Additional note (max 255 characters)
+- `amount` **(required)** - how much you spent (minimum 0.01 baht)
+- `category` **(required)** - what you spent on:
+  - 🍕 Food & Drinks (munchies)
+  - 🚗 Transportation (on the move)
+  - 🛍️ Shopping (treat yourself)
+  - 🏠 Bills & Utilities (adulting)
+  - 🎮 Entertainment (vibes)
+  - ✨ Other (random stuff)
+- `note` *(optional)* - spill the tea (max 255 characters)
 
 ### Examples
 ```
-/record expense amount:150 category:🍲 อาหาร/เครื่องดื่ม note:กาแฟเช้า
-/record expense amount:500 category:🚗 เดินทาง note:น้ำมันรถ
-/record expense amount:1200 category:🛍️ ช้อปปิ้ง note:เสื้อผ้า
-/record expense amount:800 category:🏠 บิล/ค่าใช้จ่ายประจำ note:ค่าไฟ
+/record expense amount:150 category:munchies note:boba run
+/record expense amount:500 category:on the move note:gas money
+/record expense amount:1200 category:treat yourself note:new fit
+/record expense amount:800 category:adulting note:electric bill
 ```
 
 ### Response
@@ -37,10 +37,11 @@ Returns a **red-colored embed** with:
 - Transaction details
 - Timestamp
 - Your Discord profile
+- Footer: "tiramisu | money moves only 🔥"
 
 ---
 
-## 💰 `/record income` - Record Income
+## 💰 `/record income` - secured the bag!! 💯
 
 Track your earnings.
 
@@ -50,19 +51,19 @@ Track your earnings.
 ```
 
 ### Parameters
-- `amount` **(required)** - Amount in Baht (minimum 0.01)
-- `category` **(required)** - Choose from:
-  - 💵 เงินเดือน (Salary)
-  - 💼 งานเสริม / ฟรีแลนซ์ (Freelance & Side Jobs)
-  - 🎁 ของขวัญ / โบนัส (Gifts & Bonuses)
-  - 📦 รายรับอื่นๆ (Other Income)
-- `note` *(optional)* - Additional note (max 255 characters)
+- `amount` **(required)** - how much you made (minimum 0.01 baht)
+- `category` **(required)** - where the money from:
+  - 💰 Salary (main bag)
+  - 💼 Freelance (side hustle)
+  - 🎁 Gifts & Bonuses (blessed)
+  - ✨ Other Income (extra $$$)
+- `note` *(optional)* - spill the tea (max 255 characters)
 
 ### Examples
 ```
-/record income amount:30000 category:💵 เงินเดือน note:เงินเดือนเดือนสิงหาคม
-/record income amount:5000 category:💼 งานเสริม/ฟรีแลนซ์ note:โปรเจค freelance
-/record income amount:2000 category:🎁 ของขวัญ/โบนัส note:โบนัสงาน
+/record income amount:30000 category:main bag note:payday!!
+/record income amount:5000 category:side hustle note:freelance gig
+/record income amount:2000 category:blessed note:birthday money
 ```
 
 ### Response
@@ -70,10 +71,11 @@ Returns a **green-colored embed** with:
 - Transaction details
 - Timestamp
 - Your Discord profile
+- Footer: "tiramisu | money moves only 🔥"
 
 ---
 
-## 📊 `/summary` - View Financial Summary
+## 📊 `/summary` - ur money recap
 
 Get a detailed summary of your income and expenses.
 
@@ -83,58 +85,54 @@ Get a detailed summary of your income and expenses.
 ```
 
 ### Parameters
-- `period` **(required)** - Choose from:
-  - 📅 เดือนนี้ (This Month)
-  - 📆 ปีนี้ (This Year)
+- `period` **(required)** - what timeframe tho:
+  - 🔥 this month
+  - 💯 this year
 
 ### Examples
 ```
-/summary period:เดือนนี้
-/summary period:ปีนี้
+/summary period:this month
+/summary period:this year
 ```
 
 ### Response
 Returns an embed showing:
-- **Total Income** (💰 รายรับรวม)
-- **Total Expenses** (💸 รายจ่ายรวม)
-- **Net Balance** (💵 คงเหลือสุทธิ)
-  - Green if positive
-  - Red if negative
-- **Category Breakdown** (📈 รายจ่ายตามหมวดหมู่)
+- **money in** - total income
+- **money out** - total expenses  
+- **left over** - net balance
+  - Green with "✨ W rizz" if positive
+  - Red with "😭 L fr" if negative
+- **where ur money went** - category breakdown
   - Visual percentage bars
   - Sorted by highest spending
   - Shows amount and percentage per category
 
 ### Example Output
 ```
-📊 สรุปการเงินเดือนนี้
-August 2026
+📊 ur money recap - this month
+August 2026 | 🔥 W rizz
 
-💰 รายรับรวม: ฿35,000
-💸 รายจ่ายรวม: ฿12,500
-💵 คงเหลือสุทธิ: +฿22,500
+💰 money in: ฿35,000
+💸 money out: ฿12,500
+✨ left over: +฿22,500
 
-📈 รายจ่ายตามหมวดหมู่
+🔥 where ur money went
 
-🍲 อาหาร / เครื่องดื่ม
+🍕 Food & Drinks (munchies)
 ████████░░ 45.0% (฿5,625)
 
-🚗 เดินทาง
+🚗 Transportation (on the move)
 ████░░░░░░ 24.0% (฿3,000)
 
-🛍️ ช้อปปิ้ง
+🛍️ Shopping (treat yourself)
 ███░░░░░░░ 16.0% (฿2,000)
-
-🏠 บิล / ค่าใช้จ่ายประจำ
-██░░░░░░░░ 12.0% (฿1,500)
-
-🎮 บันเทิง / สตรีมมิ่ง
-█░░░░░░░░░ 3.0% (฿375)
 ```
+
+Footer: "tiramisu | no cap tracking 💯"
 
 ---
 
-## ⚔️ `/compare` - Compare Expenses
+## ⚔️ `/compare` - battle ur homie fr
 
 Compare your monthly expenses with another user.
 
@@ -144,7 +142,7 @@ Compare your monthly expenses with another user.
 ```
 
 ### Parameters
-- `target` **(required)** - Mention the Discord user to compare with
+- `target` **(required)** - who we beefing with
   - Cannot be yourself
   - Cannot be a bot
 
@@ -156,58 +154,62 @@ Compare your monthly expenses with another user.
 
 ### Response
 Returns a comparison embed showing:
+- **W/L indicators** - who's winning the savings game
 - **Both users' total expenses** for current month
-- **Winner indicator** (🏆) for who spent less
 - **Top spending category** for each user
-- **Difference amount** (how much less the winner spent)
+- **verdict** - who saved more and by how much
 
 ### Example Output
 ```
-⚔️ เปรียบเทียบรายจ่ายประจำเดือน
-You VS @Friend
+⚔️ spending battle fr fr
+You VS Friend
 
-🏆 You
-รายจ่าย: ฿12,500
-หมวดสูงสุด: 🍲 อาหาร / เครื่องดื่ม
+W You
+💸 spent: ฿12,500
+🔝 mostly on: 🍕 Food & Drinks (munchies)
 
-📊 @Friend
-รายจ่าย: ฿15,800
-หมวดสูงสุด: 🛍️ ช้อปปิ้ง
+L Friend
+💸 spent: ฿15,800
+🔝 mostly on: 🛍️ Shopping (treat yourself)
 
-📉 ผลต่าง
-You ใช้น้อยกว่า ฿3,300
+🔥 verdict
+You ate!! saved ฿3,300 more than Friend 💯
 ```
+
+Footer: "tiramisu | slay the spending game 💅"
 
 ---
 
-## 🚨 Error Handling
+## 💀 Error Messages (bruh moments)
 
-All commands include built-in error handling:
+All commands include error handling:
 
-### Common Errors
-
-**Invalid Amount**
+### Invalid Amount
 ```
-❌ เกิดข้อผิดพลาด
-จำนวนเงินต้องมากกว่า 0 บาท
-```
-
-**Cannot Compare with Bot**
-```
-❌ เกิดข้อผิดพลาด
-ไม่สามารถเปรียบเทียบกับบอทได้
+💀 bruh moment
+aint no way 💀 amount gotta be more than 0 baht bestie
+run it back bestie 💫
 ```
 
-**Cannot Compare with Yourself**
+### Cannot Compare with Bot
 ```
-❌ เกิดข้อผิดพลาด
-ไม่สามารถเปรียบเทียบกับตัวเองได้
+💀 bruh moment
+bruh u cant beef with a bot 💀
+run it back bestie 💫
 ```
 
-**Database Error**
+### Cannot Compare with Yourself
 ```
-❌ เกิดข้อผิดพลาด
-ไม่สามารถบันทึกรายการได้ กรุณาลองใหม่อีกครั้ง
+💀 bruh moment
+bestie u cant compare with urself 😭 thats just sad
+run it back bestie 💫
+```
+
+### Database Error
+```
+💀 bruh moment
+lowkey broke rn 💀 couldnt save that, try again
+run it back bestie 💫
 ```
 
 ---
@@ -215,66 +217,65 @@ All commands include built-in error handling:
 ## 💡 Tips & Best Practices
 
 ### Recording Transactions
-- ✅ **Be consistent** - Record transactions regularly
-- ✅ **Add notes** - Makes it easier to remember later
-- ✅ **Choose correct categories** - Helps with accurate summaries
-- ✅ **Round amounts** - Use whole numbers when possible (e.g., 100 instead of 99.50)
+- ✅ **Be consistent** - record daily for accuracy
+- ✅ **Add notes** - spill the tea for context
+- ✅ **Choose correct categories** - helps with summaries fr fr
+- ✅ **Round amounts** - keep it simple bestie
 
 ### Using Summaries
-- 📅 **Check monthly** - Review at the end of each month
-- 📆 **Check yearly** - Great for annual financial reviews
-- 📊 **Track trends** - Compare month-to-month to identify spending patterns
-- 🎯 **Set goals** - Use summaries to set spending limits per category
+- 📅 **Check monthly** - review at end of month
+- 📆 **Check yearly** - annual financial glow up
+- 📊 **Track trends** - see where ur money be going
+- 🎯 **Set goals** - use summaries to budget better
 
 ### Comparing with Friends
-- 🏆 **Make it fun** - Gamify saving money with friends
-- 💪 **Friendly competition** - See who can spend less
-- 📉 **Learn habits** - Discover where others save money
-- 🤝 **Accountability** - Keep each other motivated to save
+- 🏆 **Make it fun** - gamify saving money
+- 💪 **Friendly competition** - see who's slaying
+- 📉 **Learn habits** - discover saving strategies
+- 🤝 **Accountability** - keep each other motivated
 
 ---
 
 ## 🔐 Privacy Notes
 
-- All financial data is **private per-user**
-- Other users **cannot see** your individual transactions
-- Only you can see your own `/summary`
-- `/compare` only shows **monthly totals** and **top categories**, not detailed transactions
-- All data is stored securely in the database with your Discord User ID
+- All data is **private per-user** (no cap)
+- Other users **cannot see** your transactions
+- Only you can see your `/summary`
+- `/compare` only shows **monthly totals** and **top categories**
+- Data stored securely with your Discord User ID
 
 ---
 
-## ⏱️ Timezone Information
+## ⏱️ Timezone Info
 
-All timestamps are in **Asia/Bangkok (ICT/GMT+7)** timezone.
+All timestamps use **Asia/Bangkok (ICT/GMT+7)** timezone.
 
 This affects:
-- Transaction creation times
-- Monthly summaries (use Bangkok's month boundaries)
-- Yearly summaries (use Bangkok's year boundaries)
-- Comparisons (current month in Bangkok time)
+- Transaction timestamps
+- Monthly/yearly boundaries
+- Comparison calculations
 
 ---
 
 ## 🔄 Command Refresh
 
 If commands don't appear after bot restart:
-1. Wait 1-5 minutes (global commands take time to propagate)
+1. Wait 1-5 minutes (global commands take time)
 2. Refresh Discord (Ctrl+R / Cmd+R)
-3. Try typing `/` in the chat to trigger autocomplete
-4. If still missing, kick and re-invite the bot
+3. Type `/` to trigger autocomplete
+4. Kick and re-invite bot if needed
 
 ---
 
 ## 📱 Mobile Usage
 
-All commands work perfectly on:
+Works on all platforms:
 - ✅ Discord Mobile App (iOS/Android)
 - ✅ Discord Desktop App
 - ✅ Discord Web Browser
 
-Embeds are responsive and readable on all devices!
+Embeds look fire on all devices! 🔥
 
 ---
 
-**Ready to start tracking? Try `/record expense` now! 🚀**
+**ready to track? hit `/record expense` and start slaying! 🚀💯**

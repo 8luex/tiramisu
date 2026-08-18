@@ -6,15 +6,15 @@ import dayjs from '../utils/date';
 
 export const data = new SlashCommandBuilder()
   .setName('summary')
-  .setDescription('สรุปรายรับรายจ่าย')
+  .setDescription('📊 check ur money situation fr')
   .addStringOption((option) =>
     option
       .setName('period')
-      .setDescription('ช่วงเวลา')
+      .setDescription('⏰ what timeframe tho')
       .setRequired(true)
       .addChoices(
-        { name: '📅 เดือนนี้', value: 'MONTH' },
-        { name: '📆 ปีนี้', value: 'YEAR' }
+        { name: '🔥 this month', value: 'MONTH' },
+        { name: '💯 this year', value: 'YEAR' }
       )
   );
 
@@ -86,7 +86,7 @@ export async function execute(interaction: ChatInputCommandInteraction): Promise
     await interaction.editReply({ embeds: [embed] });
   } catch (error) {
     console.error('Error generating summary:', error);
-    const errorEmbed = createErrorEmbed('ไม่สามารถสรุปข้อมูลได้ กรุณาลองใหม่อีกครั้ง');
+    const errorEmbed = createErrorEmbed('nah fam the summary aint loading 💀 hit it again');
 
     if (interaction.deferred) {
       await interaction.editReply({ embeds: [errorEmbed] });

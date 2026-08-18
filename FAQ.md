@@ -1,12 +1,12 @@
 # ❓ Frequently Asked Questions (FAQ)
 
-Common questions and answers about Tiramisu Finance Bot.
+Common questions and answers about Tiramisu Bot.
 
 ---
 
 ## 🤖 General Questions
 
-### Q: What is Tiramisu Finance Bot?
+### Q: What is Tiramisu Bot?
 **A:** Tiramisu is a personal finance and expense tracking Discord bot that helps you record income/expenses, view financial summaries, and compare spending with friends - all within Discord.
 
 ### Q: Is it free to use?

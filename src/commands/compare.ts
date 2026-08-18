@@ -6,9 +6,9 @@ import dayjs from '../utils/date';
 
 export const data = new SlashCommandBuilder()
   .setName('compare')
-  .setDescription('เปรียบเทียบรายจ่ายกับเพื่อน')
+  .setDescription('⚔️ battle ur homie fr')
   .addUserOption((option) =>
-    option.setName('target').setDescription('ผู้ใช้ที่ต้องการเปรียบเทียบ').setRequired(true)
+    option.setName('target').setDescription('👥 who we beefing with').setRequired(true)
   );
 
 export async function execute(interaction: ChatInputCommandInteraction): Promise<void> {
@@ -19,14 +19,14 @@ export async function execute(interaction: ChatInputCommandInteraction): Promise
 
     if (targetUser.bot) {
       await interaction.editReply({
-        embeds: [createErrorEmbed('ไม่สามารถเปรียบเทียบกับบอทได้')],
+        embeds: [createErrorEmbed('bruh u cant beef with a bot 💀')],
       });
       return;
     }
 
     if (targetUser.id === interaction.user.id) {
       await interaction.editReply({
-        embeds: [createErrorEmbed('ไม่สามารถเปรียบเทียบกับตัวเองได้')],
+        embeds: [createErrorEmbed('bestie u cant compare with urself 😭 thats just sad')],
       });
       return;
     }
@@ -96,7 +96,7 @@ export async function execute(interaction: ChatInputCommandInteraction): Promise
     await interaction.editReply({ embeds: [embed] });
   } catch (error) {
     console.error('Error comparing expenses:', error);
-    const errorEmbed = createErrorEmbed('ไม่สามารถเปรียบเทียบข้อมูลได้ กรุณาลองใหม่อีกครั้ง');
+    const errorEmbed = createErrorEmbed('comparison machine broke 💀 try again bestie');
 
     if (interaction.deferred) {
       await interaction.editReply({ embeds: [errorEmbed] });

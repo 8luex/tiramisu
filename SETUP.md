@@ -1,4 +1,4 @@
-# 🚀 Setup Guide for Tiramisu Finance Bot
+# 🚀 Setup Guide for Tiramisu Bot
 
 This guide will walk you through setting up the bot from scratch to deployment.
 
@@ -20,7 +20,7 @@ Before you begin, ensure you have:
 ### 1.1 Create Application
 1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
 2. Click **"New Application"**
-3. Name it "Tiramisu Finance Bot" (or your preferred name)
+3. Name it "Tiramisu Bot" (or your preferred name)
 4. Click **"Create"**
 
 ### 1.2 Create Bot User
@@ -140,7 +140,7 @@ npm run dev
 
 Expected output:
 ```
-🤖 Bot logged in as Tiramisu Finance Bot#1234
+🤖 Bot logged in as tiramisu#6772
 📊 Serving 3 commands
 🔄 Registering slash commands globally...
 ✅ Slash commands registered successfully
@@ -277,7 +277,7 @@ NODE_ENV=production
 
 ## 🎉 Success!
 
-Your Tiramisu Finance Bot should now be running! Users can start tracking their finances using the slash commands.
+Your Tiramisu Bot should now be running! Users can start tracking their finances using the slash commands.
 
 For customization options, see [README.md](README.md).
 

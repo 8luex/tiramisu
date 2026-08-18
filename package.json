@@ -1,7 +1,7 @@
 {
-  "name": "tiramisu-finance-bot",
+  "name": "tiramisu-bot",
   "version": "1.0.0",
-  "description": "Personal Finance & Expense Tracker Discord Bot optimized for Discloud",
+  "description": "Expense Tracker Discord Bot that hits different - optimized for Discloud",
   "main": "dist/index.js",
   "type": "commonjs",
   "scripts": {
@@ -19,7 +19,8 @@
     "finance",
     "expense-tracker",
     "prisma",
-    "mysql"
+    "mysql",
+    "tiramisu"
   ],
   "author": "",
   "license": "MIT",

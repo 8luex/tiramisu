@@ -188,7 +188,7 @@ discloud logs <app-id>
 
 Expected healthy logs:
 ```
-🤖 Bot logged in as Tiramisu Finance Bot#1234
+🤖 Bot logged in as tiramisu#6772
 📊 Serving 3 commands
 🔄 Registering slash commands globally...
 ✅ Slash commands registered successfully

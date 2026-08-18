@@ -10,49 +10,49 @@ import { createTransactionEmbed, createErrorEmbed } from '../utils/embeds';
 
 export const data = new SlashCommandBuilder()
   .setName('record')
-  .setDescription('บันทึกรายรับหรือรายจ่าย')
+  .setDescription('💰 track ur money moves')
   .addSubcommand((subcommand: SlashCommandSubcommandBuilder) =>
     subcommand
       .setName('expense')
-      .setDescription('บันทึกรายจ่าย')
+      .setDescription('💸 spent some cash')
       .addNumberOption((option) =>
         option
           .setName('amount')
-          .setDescription('จำนวนเงิน (บาท)')
+          .setDescription('💵 how much did u spend')
           .setRequired(true)
           .setMinValue(0.01)
       )
       .addStringOption((option) =>
         option
           .setName('category')
-          .setDescription('หมวดหมู่รายจ่าย')
+          .setDescription('📁 what did u spend on')
           .setRequired(true)
           .addChoices(...EXPENSE_CATEGORIES)
       )
       .addStringOption((option) =>
-        option.setName('note').setDescription('หมายเหตุ (ถ้ามี)').setMaxLength(255)
+        option.setName('note').setDescription('📝 spill the tea (optional)').setMaxLength(255)
       )
   )
   .addSubcommand((subcommand: SlashCommandSubcommandBuilder) =>
     subcommand
       .setName('income')
-      .setDescription('บันทึกรายรับ')
+      .setDescription('💰 secured the bag')
       .addNumberOption((option) =>
         option
           .setName('amount')
-          .setDescription('จำนวนเงิน (บาท)')
+          .setDescription('💵 how much u made')
           .setRequired(true)
           .setMinValue(0.01)
       )
       .addStringOption((option) =>
         option
           .setName('category')
-          .setDescription('หมวดหมู่รายรับ')
+          .setDescription('📁 where the money from')
           .setRequired(true)
           .addChoices(...INCOME_CATEGORIES)
       )
       .addStringOption((option) =>
-        option.setName('note').setDescription('หมายเหตุ (ถ้ามี)').setMaxLength(255)
+        option.setName('note').setDescription('📝 spill the tea (optional)').setMaxLength(255)
       )
   );
 
@@ -65,7 +65,7 @@ export async function execute(interaction: ChatInputCommandInteraction): Promise
 
     if (amount <= 0) {
       await interaction.reply({
-        embeds: [createErrorEmbed('จำนวนเงินต้องมากกว่า 0 บาท')],
+        embeds: [createErrorEmbed('aint no way 💀 amount gotta be more than 0 baht bestie')],
         ephemeral: true,
       });
       return;
@@ -95,7 +95,7 @@ export async function execute(interaction: ChatInputCommandInteraction): Promise
   } catch (error) {
     console.error('Error recording transaction:', error);
     await interaction.reply({
-      embeds: [createErrorEmbed('ไม่สามารถบันทึกรายการได้ กรุณาลองใหม่อีกครั้ง')],
+      embeds: [createErrorEmbed('lowkey broke rn 💀 couldnt save that, try again')],
       ephemeral: true,
     });
   }

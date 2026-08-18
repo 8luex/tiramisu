@@ -77,7 +77,7 @@ client.on('interactionCreate', async (interaction) => {
     console.error(`Error executing command ${interaction.commandName}:`, error);
 
     const errorMessage = {
-      content: '❌ เกิดข้อผิดพลาดในการประมวลผลคำสั่ง กรุณาลองใหม่อีกครั้ง',
+      content: '💀 bruh moment fr fr... try that again bestie',
       ephemeral: true,
     };
 
