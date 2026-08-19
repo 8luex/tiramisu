@@ -1,31 +1,33 @@
-import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js';
 import { Decimal } from '@prisma/client/runtime/library';
 import prisma from '../db/client';
 import { createSummaryEmbed, createErrorEmbed } from '../utils/embeds';
 import dayjs from '../utils/date';
 
-export const data = new SlashCommandBuilder()
-  .setName('summary')
-  .setDescription('📊 check ur money situation fr')
-  .addStringOption((option) =>
-    option
-      .setName('period')
-      .setDescription('⏰ what timeframe tho')
-      .setRequired(true)
-      .addChoices(
-        { name: '📅 this week', value: 'WEEK' },
-        { name: '🔥 this month', value: 'MONTH' },
-        { name: '💯 this year', value: 'YEAR' }
-      )
-  );
+interface DiscordInteraction {
+  type: number;
+  data: {
+    name: string;
+    options?: Array<{
+      name: string;
+      value: any;
+    }>;
+  };
+  member: {
+    user: {
+      id: string;
+      username: string;
+      avatar: string | null;
+    };
+  };
+}
 
-export async function execute(interaction: ChatInputCommandInteraction): Promise<void> {
+export async function handleSummaryCommand(interaction: DiscordInteraction) {
   try {
-    await interaction.deferReply();
+    const period = (interaction.data.options?.find((opt) => opt.name === 'period')
+      ?.value || 'MONTH') as 'WEEK' | 'MONTH' | 'YEAR';
+    const userId = interaction.member.user.id;
 
-    const period = interaction.options.getString('period', true) as 'WEEK' | 'MONTH' | 'YEAR';
     const now = dayjs().tz();
-
     let startDate: Date;
     let endDate: Date;
 
@@ -40,10 +42,11 @@ export async function execute(interaction: ChatInputCommandInteraction): Promise
       endDate = now.endOf('year').toDate();
     }
 
+    // Aggregate transactions
     const aggregates = await prisma.transaction.groupBy({
       by: ['type', 'category'],
       where: {
-        userId: interaction.user.id,
+        userId,
         createdAt: {
           gte: startDate,
           lte: endDate,
@@ -59,7 +62,9 @@ export async function execute(interaction: ChatInputCommandInteraction): Promise
     const expenseByCategory: Map<string, Decimal> = new Map();
 
     for (const agg of aggregates) {
-      const amount = agg._sum.amount ? new Decimal(agg._sum.amount.toString()) : new Decimal(0);
+      const amount = agg._sum.amount
+        ? new Decimal(agg._sum.amount.toString())
+        : new Decimal(0);
 
       if (agg.type === 'INCOME') {
         totalIncome = totalIncome.plus(amount);
@@ -79,23 +84,42 @@ export async function execute(interaction: ChatInputCommandInteraction): Promise
       })
       .sort((a, b) => b.percentage - a.percentage);
 
+    // Create user object for embed
+    const user = {
+      id: interaction.member.user.id,
+      username: interaction.member.user.username,
+      displayAvatarURL: () => {
+        const avatar = interaction.member.user.avatar;
+        if (avatar) {
+          return `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${avatar}.png`;
+        }
+        return `https://cdn.discordapp.com/embed/avatars/0.png`;
+      },
+    };
+
     const embed = createSummaryEmbed(
-      interaction.user,
+      user as any,
       period,
       totalIncome,
       totalExpense,
       categoryBreakdown
     );
 
-    await interaction.editReply({ embeds: [embed] });
+    return {
+      type: 4,
+      data: {
+        embeds: [embed.toJSON()],
+      },
+    };
   } catch (error) {
-    console.error('Error generating summary:', error);
-    const errorEmbed = createErrorEmbed('nah fam the summary aint loading 💀 hit it again');
-
-    if (interaction.deferred) {
-      await interaction.editReply({ embeds: [errorEmbed] });
-    } else {
-      await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
-    }
+    console.error('Error in handleSummaryCommand:', error);
+    return {
+      type: 4,
+      data: {
+        embeds: [
+          createErrorEmbed('nah fam the summary aint loading 💀 hit it again').toJSON(),
+        ],
+      },
+    };
   }
 }

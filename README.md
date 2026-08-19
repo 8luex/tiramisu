@@ -1,8 +1,10 @@
-# 🍰 Tiramisu Bot
+# 🍰☕ Tiramisu Bot - Serverless Edition
 
-A lightweight, production-ready **Expense Tracker Discord Bot** optimized for **Discloud** free tier hosting (100MB RAM limit).
+A **100% serverless** expense tracker Discord bot using **AWS Lambda** + **HTTP Interactions**.
 
-Track your spending the way you actually talk! Built with **TypeScript**, **discord.js v14**, **Prisma ORM**, and **MySQL**.
+**No 24/7 hosting needed** - completely free forever using AWS Free Tier! ✨
+
+Track your spending the way you actually talk! Built with **TypeScript**, **AWS Lambda**, **Prisma ORM**, and **MySQL**.
 
 ---
 
@@ -38,109 +40,193 @@ Track your spending the way you actually talk! Built with **TypeScript**, **disc
 
 ---
 
-## 🚀 Quick Start
+## ⚡ Why Serverless?
+
+### Traditional Bot (Gateway):
+- ❌ Needs 24/7 server
+- ❌ Hosting costs ($2-5/month)
+- ❌ Limited RAM/CPU
+- ❌ Downtime during maintenance
+- ❌ "NO_CLUSTER" errors on free tiers
+
+### Serverless Lambda:
+- ✅ **100% FREE** (1M requests/month forever)
+- ✅ No server to maintain
+- ✅ Auto-scaling (unlimited)
+- ✅ Only runs when commands are used
+- ✅ Built-in monitoring
+- ✅ Global edge locations
+
+---
+
+## 🚀 Quick Deploy (10 Minutes)
 
 ### Prerequisites
-- **Node.js** v20+ LTS
-- **MySQL** database (local or hosted)
-- **Discord Bot Token** from [Discord Developer Portal](https://discord.com/developers/applications)
+- **AWS Account** (free tier: aws.amazon.com/free)
+- **Discord Bot** (discord.com/developers/applications)
+- **MySQL Database** (Railway/PlanetScale/AWS RDS/your own)
 
-### 1. Installation
+### Step 1: Build Deployment Package
 
 ```bash
-# Clone or download this repository
+# Clone repository
+git clone <your-repo-url>
 cd tiramisu
 
 # Install dependencies
 npm install
 
-# Copy environment template
-cp .env.example .env
+# Build Lambda bundle
+npm run build:deploy
 ```
 
-### 2. Environment Configuration
+This creates `dist/lambda-deployment.zip` ready for upload!
 
-Edit `.env` file with your credentials:
+### Step 2: Deploy to AWS Lambda
+
+1. **Create Lambda Function:**
+   - Go to https://console.aws.amazon.com/lambda/
+   - Click "Create function"
+   - Name: `tiramisu-bot`
+   - Runtime: Node.js 20.x
+   - Architecture: arm64
+
+2. **Upload Code:**
+   - Upload `dist/lambda-deployment.zip`
+   - Set handler: `lambda.handler`
+
+3. **Configure:**
+   - Memory: 512 MB
+   - Timeout: 15 seconds
+   - Environment variables (see below)
+
+4. **Create Function URL:**
+   - Configuration → Function URL
+   - Auth type: NONE
+   - Copy the URL
+
+### Step 3: Environment Variables
+
+Add these in Lambda Console → Configuration → Environment variables:
 
 ```env
-DISCORD_TOKEN=your_discord_bot_token_here
-APPLICATION_ID=your_application_id_here
-DATABASE_URL=mysql://user:password@localhost:3306/finance_bot?connection_limit=3
-NODE_ENV=development
+DISCORD_PUBLIC_KEY=your_public_key_from_discord_portal
+DATABASE_URL=mysql://user:password@host:3306/database?connection_limit=5
+NODE_ENV=production
+TZ=Asia/Bangkok
 ```
 
-### 3. Database Setup
+### Step 4: Register Commands
 
 ```bash
-# Push schema to database
-npm run prisma:push
+# Set environment variables
+export DISCORD_TOKEN="your_bot_token"
+export APPLICATION_ID="your_app_id"
 
-# Or create migrations (recommended for production)
-npm run prisma:migrate
+# Register slash commands
+npm run register:commands
 ```
 
-### 4. Development
+### Step 5: Connect Discord
 
-```bash
-# Run in development mode with hot reload
-npm run dev
+1. Go to Discord Developer Portal
+2. General Information → Interactions Endpoint URL
+3. Paste your Lambda Function URL
+4. Save (Discord will verify with PING)
+
+### Step 6: Test!
+
 ```
-
-### 5. Production Build
-
-```bash
-# Build TypeScript to JavaScript
-npm run build
-
-# Start production server
-npm start
+/record expense amount:150 category:munchies note:coffee run
+/summary period:this week
+/compare target1:@Friend period:this month
 ```
 
 ---
 
-## 🌐 Discloud Deployment
+## 📚 Documentation
 
-### Preparation
+- **[SERVERLESS_QUICKSTART.md](SERVERLESS_QUICKSTART.md)** - 10-minute setup guide
+- **[AWS_LAMBDA_DEPLOYMENT.md](AWS_LAMBDA_DEPLOYMENT.md)** - Detailed deployment guide
+- **[COMMANDS.md](COMMANDS.md)** - Command reference
 
-1. **Update `discloud.config`:**
-   ```
-   ID=your-bot-application-id
-   TYPE=bot
-   MAIN=dist/index.js
-   RAM=100
-   AUTORESTART=true
-   VERSION=stable
-   APT=tools
-   ```
+---
 
-2. **Set Environment Variables in Discloud:**
-   - `DISCORD_TOKEN` - Your Discord bot token
-   - `APPLICATION_ID` - Your Discord application ID
-   - `DATABASE_URL` - Your MySQL connection string with `?connection_limit=3`
-   - `NODE_ENV=production`
+## 💰 Cost Estimate
 
-3. **Build the project:**
-   ```bash
-   npm run build
-   ```
+### AWS Lambda Free Tier (Forever):
+- **1 million requests/month** - FREE
+- **400,000 GB-seconds** - FREE
 
-4. **Deploy files to Discloud:**
-   - Upload `dist/` folder (compiled JavaScript)
-   - Upload `node_modules/` folder
-   - Upload `prisma/` folder
-   - Upload `.env` file (with production values)
-   - Upload `discloud.config`
-   - Upload `package.json`
+### Your Usage (~100 commands/day):
+- **3,000 requests/month**
+- **Cost: $0.00**
 
-### Memory Optimization for Discloud
+### Even at 1M requests/month:
+- **Still $0.00** (within free tier!)
 
-This bot is specifically optimized for 100MB RAM:
-- ✅ Minimal Discord Gateway Intents (Guilds only)
-- ✅ Prisma connection pool limited to 3 connections
-- ✅ Database aggregations instead of in-memory processing
-- ✅ No caching mechanisms
-- ✅ Efficient embed builders
-- ✅ Single-threaded architecture
+**No hosting costs, ever!** 🔥
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| **TypeScript** | Type-safe development |
+| **AWS Lambda** | Serverless compute |
+| **HTTP Interactions** | Discord webhook protocol |
+| **Prisma ORM** | Database ORM with type safety |
+| **MySQL** | Relational database |
+| **dayjs** | Timezone handling (Asia/Bangkok) |
+| **esbuild** | Fast bundler |
+| **discord-interactions** | Signature verification |
+
+---
+
+## 📁 Project Structure
+
+```
+tiramisu/
+├── src/
+│   ├── lambda.ts              # Lambda handler entry point
+│   ├── handlers/
+│   │   ├── record.ts          # /record command handler
+│   │   ├── summary.ts         # /summary command handler
+│   │   └── compare.ts         # /compare command handler
+│   ├── utils/
+│   │   ├── embeds.ts          # Embed builders (tiramisu theme)
+│   │   ├── categories.ts      # Category definitions
+│   │   └── date.ts            # dayjs configuration
+│   └── db/
+│       └── client.ts          # Prisma client singleton
+├── scripts/
+│   └── register-commands.mjs  # Command registration script
+├── prisma/
+│   └── schema.prisma          # Database schema
+├── build.mjs                  # esbuild configuration
+├── package.json
+└── dist/
+    └── lambda-deployment.zip  # Deployment package
+```
+
+---
+
+## 🎨 Tiramisu Theme
+
+The bot uses a cozy cafe aesthetic inspired by tiramisu dessert:
+
+**Colors:**
+- ☕ Coffee Brown (`#D4A574`) - Expenses, errors
+- 🍰 Cream (`#FFF8E7`) - Income, positive balance
+- 🤎 Latte (`#C8A882`) - Comparisons
+- 🍪 Biscuit (`#E8D5C4`) - Multi-user leaderboards
+
+**Emojis:**
+- ☕ Coffee - Spending/expenses
+- 🍰 Cake - Income/positive
+- 🥛 Milk - Money in
+- 🤎 Brown heart - Negative balance
 
 ---
 
@@ -163,123 +249,124 @@ model Transaction {
 
 ---
 
-## 🛠️ Tech Stack
+## 🔄 Updating Code
 
-| Technology | Purpose |
-|------------|---------|
-| **TypeScript** | Type-safe development |
-| **discord.js v14** | Discord API wrapper |
-| **Prisma ORM** | Database ORM with type safety |
-| **MySQL** | Relational database |
-| **dayjs** | Timezone handling (Asia/Bangkok) |
-| **dotenv** | Environment variable management |
+```bash
+# 1. Make changes to src/
+# 2. Rebuild
+npm run build:deploy
 
----
-
-## 📁 Project Structure
-
-```
-tiramisu/
-├── src/
-│   ├── index.ts              # Bot entry point
-│   ├── commands/
-│   │   ├── record.ts         # /record command
-│   │   ├── summary.ts        # /summary command
-│   │   └── compare.ts        # /compare command
-│   ├── utils/
-│   │   ├── embeds.ts         # Embed builders
-│   │   ├── categories.ts     # Category definitions
-│   │   └── date.ts           # dayjs configuration
-│   └── db/
-│       └── client.ts         # Prisma client singleton
-├── prisma/
-│   └── schema.prisma         # Database schema
-├── dist/                     # Compiled JavaScript (after build)
-├── package.json
-├── tsconfig.json
-├── discloud.config
-└── .env
+# 3. Upload to Lambda
+# Via Console: Upload new .zip
+# Or AWS CLI:
+aws lambda update-function-code \
+  --function-name tiramisu-bot \
+  --zip-file fileb://dist/lambda-deployment.zip
 ```
 
 ---
 
-## 🎯 Commands Reference
+## 📊 Monitoring
 
-### `/record expense`
-```
-/record expense amount:100 category:อาหาร/เครื่องดื่ม note:ข้าวเที่ยง
+### CloudWatch Logs:
+```bash
+# View logs
+aws logs tail /aws/lambda/tiramisu-bot --follow
+
+# Or via Console
+Lambda → Monitor → View CloudWatch Logs
 ```
 
-### `/record income`
+### Metrics:
+- Request count
+- Error rate
+- Duration
+- Cold starts
+
+---
+
+## 🚨 Troubleshooting
+
+### "Invalid signature" error:
+- Check `DISCORD_PUBLIC_KEY` matches Discord Developer Portal
+
+### Commands not appearing:
+- Wait 1-2 minutes for sync
+- Refresh Discord (Ctrl+R)
+- Re-run `npm run register:commands`
+
+### Database connection timeout:
+- Check `DATABASE_URL` is accessible from internet
+- Increase Lambda timeout
+- Use `connection_limit=5` in DATABASE_URL
+
+### Cold start too slow:
+- Increase memory (512 MB → 1024 MB)
+- More memory = more CPU
+
+---
+
+## 🔐 Security Notes
+
+- Discord signature verification on every request
+- Environment variables encrypted at rest
+- No public endpoints (Function URL is the only entry)
+- Database credentials in Lambda environment variables
+- Consider AWS Secrets Manager for production
+
+---
+
+## 🎯 Command Examples
+
+### Record Expense
 ```
-/record income amount:30000 category:เงินเดือน note:เงินเดือนเดือนสิงหาคม
+/record expense amount:150 category:munchies note:lunch with friends
+/record expense amount:500 category:on the move note:gas money
 ```
 
-### `/summary`
+### Record Income
+```
+/record income amount:30000 category:main bag note:monthly salary
+/record income amount:5000 category:side hustle note:freelance project
+```
+
+### Summary
 ```
 /summary period:this week
 /summary period:this month
 /summary period:this year
 ```
 
-### `/compare`
+### Compare
 ```
-/compare target1:@friend1
-/compare target1:@friend1 target2:@friend2 period:this week
-/compare target1:@friend1 target2:@friend2 target3:@friend3 period:this month
+/compare target1:@Friend
+/compare target1:@Friend1 target2:@Friend2 period:this week
+/compare target1:@Friend1 target2:@Friend2 target3:@Friend3 period:this month
 ```
 
 ---
 
-## 🔒 Security Notes
+## 🤝 Contributing
 
-- Never commit `.env` file to version control
-- Keep your `DISCORD_TOKEN` secret
-- Use environment variables for sensitive data
-- Limit database connection pool for memory optimization
+Feel free to fork and customize for your needs!
 
 ---
 
 ## 📝 License
 
-MIT License - Feel free to use and modify for your needs.
+MIT License - Use freely!
 
 ---
 
-## 🤝 Support
+## 🆘 Support
 
 For issues or questions:
-1. Check the [Discord.js Guide](https://discordjs.guide/)
-2. Review [Prisma Documentation](https://www.prisma.io/docs/)
-3. Visit [Discloud Documentation](https://docs.discloudbot.com/)
+1. Check [AWS_LAMBDA_DEPLOYMENT.md](AWS_LAMBDA_DEPLOYMENT.md)
+2. Review [AWS Lambda Documentation](https://docs.aws.amazon.com/lambda/)
+3. Check [Discord HTTP Interactions Guide](https://discord.com/developers/docs/interactions/receiving-and-responding)
 
 ---
 
-## 🎨 Customization
+**Built with 🤎☕🍰 for efficient personal finance tracking - now 100% serverless!**
 
-### Adding New Categories
-
-Edit [src/utils/categories.ts](src/utils/categories.ts):
-
-```typescript
-export const EXPENSE_CATEGORIES = [
-  { name: '🎮 Entertainment (vibes)', value: 'EDUCATION' },
-  // Add more categories...
-];
-```
-
-### Changing Timezone
-
-Edit [src/utils/date.ts](src/utils/date.ts):
-
-```typescript
-dayjs.tz.setDefault('Your/Timezone');
-```
-
-### Modifying Embed Colors
-
-Edit [src/utils/embeds.ts](src/utils/embeds.ts) to customize colors and styling.
-
----
-
-**Built with 💙 for efficient personal finance tracking**
+**No servers, no hosting costs, no problems!! fr fr** ໒꒰ྀི´ ˘ ` ꒱ྀིა

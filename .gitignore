@@ -30,5 +30,7 @@ Thumbs.db
 # Prisma
 prisma/migrations/
 
-# Discloud
-.discloud/
+# AWS Lambda deployment
+dist/deploy/
+dist/lambda-deployment.zip
+*.zip

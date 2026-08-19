@@ -1,13 +1,17 @@
 {
   "name": "tiramisu-bot",
   "version": "1.0.0",
-  "description": "Expense Tracker Discord Bot that hits different - optimized for Discloud",
-  "main": "dist/index.js",
+  "description": "Serverless Expense Tracker Discord Bot - AWS Lambda HTTP Interactions",
+  "main": "dist/lambda.js",
   "type": "commonjs",
   "scripts": {
     "build": "tsc",
+    "build:lambda": "node build.mjs",
+    "build:deploy": "npm run build:lambda && npm run prisma:generate && npm run package:lambda",
+    "package:lambda": "mkdir -p dist/deploy && cp -r node_modules/@prisma dist/deploy/ && cp -r node_modules/.prisma dist/deploy/ && cp dist/lambda.js dist/deploy/ && cd dist/deploy && zip -r ../lambda-deployment.zip .",
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
+    "register:commands": "node scripts/register-commands.mjs",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "prisma:migrate": "prisma migrate dev",
@@ -27,10 +31,12 @@
   "dependencies": {
     "@prisma/client": "^5.14.0",
     "dayjs": "^1.11.11",
-    "discord.js": "^14.14.1",
-    "dotenv": "^16.4.5"
+    "discord-interactions": "^4.4.0",
+    "dotenv": "^16.4.5",
+    "esbuild": "^0.28.2"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.162",
     "@types/node": "^20.12.12",
     "prisma": "^5.14.0",
     "tsx": "^4.10.5",
