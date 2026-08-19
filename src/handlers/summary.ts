@@ -108,7 +108,7 @@ export async function handleSummaryCommand(interaction: DiscordInteraction) {
     return {
       type: 4,
       data: {
-        embeds: [embed.toJSON()],
+        embeds: [embed],
       },
     };
   } catch (error) {
@@ -117,7 +117,7 @@ export async function handleSummaryCommand(interaction: DiscordInteraction) {
       type: 4,
       data: {
         embeds: [
-          createErrorEmbed('nah fam the summary aint loading 💀 hit it again').toJSON(),
+          createErrorEmbed('nah fam the summary aint loading 💀 hit it again'),
         ],
       },
     };

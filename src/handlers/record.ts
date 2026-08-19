@@ -49,7 +49,7 @@ export async function handleRecordCommand(interaction: DiscordInteraction) {
       return {
         type: 4,
         data: {
-          embeds: [createErrorEmbed('aint no way 💀 amount gotta be more than 0 baht bestie').toJSON()],
+          embeds: [createErrorEmbed('aint no way 💀 amount gotta be more than 0 baht bestie')],
         },
       };
     }
@@ -92,7 +92,7 @@ export async function handleRecordCommand(interaction: DiscordInteraction) {
     return {
       type: 4,
       data: {
-        embeds: [embed.toJSON()],
+        embeds: [embed],
       },
     };
   } catch (error) {
@@ -105,7 +105,7 @@ function createErrorResponse(message: string) {
   return {
     type: 4,
     data: {
-      embeds: [createErrorEmbed(message).toJSON()],
+      embeds: [createErrorEmbed(message)],
     },
   };
 }

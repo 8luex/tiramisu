@@ -60,7 +60,7 @@ export async function handleCompareCommand(interaction: DiscordInteraction) {
               embeds: [
                 createErrorEmbed(
                   'bestie u cant compare with urself 😭 thats just sad'
-                ).toJSON(),
+                ),
               ],
             },
           };
@@ -156,7 +156,7 @@ export async function handleCompareCommand(interaction: DiscordInteraction) {
     return {
       type: 4,
       data: {
-        embeds: [embed.toJSON()],
+        embeds: [embed],
       },
     };
   } catch (error) {
@@ -165,7 +165,7 @@ export async function handleCompareCommand(interaction: DiscordInteraction) {
       type: 4,
       data: {
         embeds: [
-          createErrorEmbed('comparison machine broke 💀 try again bestie').toJSON(),
+          createErrorEmbed('comparison machine broke 💀 try again bestie'),
         ],
       },
     };
@@ -176,7 +176,7 @@ function createErrorResponse(message: string) {
   return {
     type: 4,
     data: {
-      embeds: [createErrorEmbed(message).toJSON()],
+      embeds: [createErrorEmbed(message)],
     },
   };
 }
